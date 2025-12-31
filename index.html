@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year Paglu ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;overflow-x:hidden
+}
+
+/* LOCK */
+#lock{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999
+}
+.lock-box{
+  background:rgba(255,255,255,.08);
+  padding:40px;border-radius:20px;text-align:center
+}
+.lock-box input{padding:12px;border:none;border-radius:10px;margin-top:15px}
+.lock-box button{
+  margin-top:15px;padding:10px 25px;border:none;
+  border-radius:20px;background:#ff7eb3;color:white;cursor:pointer
+}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.card{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
+  padding:50px 30px;border-radius:25px;
+  max-width:600px;animation:fadeUp 1.5s ease
+}
+.neon{
+  font-size:2.7rem;
+  color:#ffb6c1;
+  text-shadow:
+    0 0 5px #ff7eb3,
+    0 0 15px #ff7eb3,
+    0 0 30px #ff4f9a;
+}
+.card h2{margin:15px 0;font-weight:400}
+.card p{opacity:.9;line-height:1.8}
+.btn{
+  display:inline-block;margin-top:25px;
+  padding:12px 30px;border-radius:30px;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:white;text-decoration:none
+}
+
+/* COUNTDOWN */
+#countdown{font-size:1.3rem;margin-top:20px;color:#ffd1dc}
+
+/* MESSAGE */
+.message{padding:80px 20px;text-align:center}
+.message h3{font-size:2rem;color:#ffd1dc;margin-bottom:20px}
+#typed{max-width:700px;margin:auto;line-height:1.9;opacity:.9}
+
+/* PHOTOS */
+.slider{display:flex;justify-content:center;gap:25px;margin-top:40px;flex-wrap:wrap}
+.photo{
+  width:240px;background:rgba(255,255,255,.08);
+  padding:15px;border-radius:20px;
+  transition:.4s
+}
+.photo:hover{transform:scale(1.05);box-shadow:0 20px 40px rgba(255,118,155,.4)}
+.photo img{
+  width:100%;height:280px;object-fit:cover;
+  border-radius:15px;filter:blur(2px);transition:.4s
+}
+.photo:hover img{filter:blur(0)}
+.photo p{margin-top:10px;color:#ffd1dc}
+
+/* MEMORY CARD */
+.memory{
+  margin:70px auto;
+  max-width:340px;
+  padding:30px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#ff7eb3,#ff758c);
+  color:#fff;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+.memory h4{font-size:1.2rem;margin-bottom:10px}
+.memory p{font-size:.95rem}
+
+/* MUSIC */
+#musicBtn{
+  position:fixed;bottom:20px;right:20px;
+  padding:10px 18px;border-radius:30px;
+  border:none;background:#ff7eb3;color:white;cursor:pointer;z-index:999
+}
+
+/* FIREWORKS */
+.firework{
+  position:fixed;width:6px;height:6px;border-radius:50%;
+  background:#fff;animation:boom 1.2s ease-out forwards
+}
+@keyframes boom{
+  to{transform:translate(var(--x),var(--y));opacity:0}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+footer{text-align:center;padding:30px;opacity:.7}
+</style>
+</head>
+
+<body>
+
+<!-- LOCK -->
+<div id="lock">
+  <div class="lock-box">
+    <h2>Only for Paglu ❤️</h2>
+    <input id="pass" type="password" placeholder="Enter password">
+    <br>
+    <button onclick="unlock()">Open</button>
+    <p style="font-size:.8rem;margin-top:10px;">Hint: what I call you 😉</p>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="card">
+    <h1 class="neon">Happy New Year, Paglu ❤️</h1>
+    <h2>Countdown to Our New Beginning</h2>
+    <div id="countdown">Loading...</div>
+    <p>When the clock hits midnight… magic happens ✨</p>
+    <a href="#msg" class="btn" onclick="startMusic()">A Message for You</a>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section class="message" id="msg">
+<h3>Dear Paglu 💫</h3>
+<p id="typed"></p>
+
+<div class="slider">
+  <div class="photo">
+    <img src="her.jpg">
+    <p>My Beautiful Paglu 💕</p>
+  </div>
+  <div class="photo">
+    <img src="us.jpg">
+    <p>Us. Always ✨</p>
+  </div>
+</div>
+
+<div class="memory">
+  <h4>📸 Our New Year Memory</h4>
+  <p>Screenshot this.  
+  This moment belongs to us — forever ❤️</p>
+</div>
+</section>
+
+<footer>Made with ❤️ just for Paglu | Happy New Year ✨</footer>
+
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()">🔊 Music</button>
+
+<script>
+/* PASSWORD */
+function unlock(){
+  if(pass.value.toLowerCase()=="paglu"){
+    lock.style.display="none";
+  }
+}
+
+/* MUSIC */
+let playing=false;
+function toggleMusic(){
+  if(!playing){bgMusic.play();playing=true}
+  else{bgMusic.pause();playing=false}
+}
+function startMusic(){bgMusic.play();playing=true}
+
+/* COUNTDOWN */
+const target=new Date(new Date().getFullYear()+1,0,1);
+let fired=false;
+setInterval(()=>{
+  const now=new Date();
+  const diff=target-now;
+  const h=Math.floor(diff/1000/60/60);
+  const m=Math.floor(diff/1000/60)%60;
+  const s=Math.floor(diff/1000)%60;
+  countdown.innerText=`${h}h ${m}m ${s}s left`;
+  if(diff<1000 && !fired){
+    fired=true;
+    launchFireworks();
+    if(navigator.vibrate) navigator.vibrate([300,200,300,200,500]);
+  }
+},1000);
+
+/* TYPING */
+const text=`Thank you for being my safe place, my smile, my favorite person.
+No matter how the world changes, I promise my love for you won’t.
+This year… and every year after that — I choose you ❤️`;
+let i=0;
+(function type(){
+  if(i<text.length){
+    typed.innerHTML+=text.charAt(i);
+    i++;setTimeout(type,40);
+  }
+})();
+
+/* FIREWORKS */
+function launchFireworks(){
+  for(let i=0;i<120;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left="50vw";
+    f.style.top="50vh";
+    f.style.setProperty("--x",(Math.random()*500-250)+"px");
+    f.style.setProperty("--y",(Math.random()*500-250)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1200);
+  }
+}
+</script>
+
+</body>
+</html>
